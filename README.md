@@ -1,4 +1,4 @@
-# PBL-Network_Infrastructure
+# PBL - University Network Infrastructure Implementation
 
 This project involved developing a network infrastructure for a university, simulated using Cisco Packet Tracer. Tasks included configuring routers, switches, and other devices to meet specific connectivity requirements and implementing stringent security measures. The objective was to ensure seamless connectivity while prioritizing the security of university data.
 
