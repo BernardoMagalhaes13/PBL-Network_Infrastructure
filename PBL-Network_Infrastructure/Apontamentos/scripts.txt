@@ -1,0 +1,101 @@
+conf t
+vtp version 2
+vtp domain Edificio2
+vtp password Edificio2
+vtp mode client
+
+show vtp status
+show vtp counters
+
+---------------
+
+conf t
+vlan 21
+name alunos
+exit
+vlan 22
+name sistemas-auxiliares
+exit
+vlan 23
+name voip
+exit
+vlan 24
+name servicos-academicos
+exit
+vlan 25
+name conselho-gestao
+exit
+vlan 26
+name gestao
+exit
+vlan 27
+name professores
+exit
+vlan 28
+name informatica
+exit
+vlan 29
+name guest
+exit
+
+---------------
+
+interface range g0/1-2
+switchport mode trunk
+switchport nonegotiate
+
+--------------
+
+spanning-tree vlan 21-29 priority 8192
+
+----------------- 
+
+interface range f0/12-22
+switchport mode access
+switchport access vlan 29
+
+--------------------
+
+ip helper-address 192.168.9.3
+
+------------------------
+
+interface range f0/23-24
+switchport trunk native vlan 29
+
+------------------------
+
+copy running-config tftp:
+192.168.9.6
+
+------------------------
+
+interface vlan 26
+ip add 192.168.3.139 255.255.255.240
+exit
+ip default-gateway 192.168.3.129
+
+copy running-config tftp: 
+192.168.9.6
+
+------------------------
+
+	conf t
+	enable secret enablepbl
+	line console 0
+	password consolepbl
+	login
+	line vty 0 4
+	password vtypbl
+	login
+	transport input ssh
+	exit
+	service password encryption
+	banner motd #
+	*********************************************** 
+	WARNING: Unauthorized access is prohibited!
+	**********************************************
+	#
+
+------------------------
+
